@@ -454,7 +454,7 @@ body {
         <label>ขนาดกระดาษ</label>
         <div class="opts">
           <button class="opt-btn active" onclick="sel(this,'size','a4')" id="o-a4"><span class="dot"></span>A4</button>
-          <button class="opt-btn" onclick="sel(this,'size','a3')" id="o-a3"><span class="dot"></span>A3 (+1 ฿/แผ่น)</button>
+          <button class="opt-btn" onclick="sel(this,'size','a3')" id="o-a3"><span class="dot"></span>A3 (+5 ฿/แผ่น)</button>
         </div>
       </div>
 
@@ -462,7 +462,7 @@ body {
         <label>การเย็บเล่ม</label>
         <div class="opts">
           <button class="opt-btn active" onclick="sel(this,'bind','none')" id="o-none"><span class="dot"></span>ไม่เย็บ</button>
-          <button class="opt-btn" onclick="sel(this,'bind','staple')" id="o-staple"><span class="dot"></span>เย็บมุม (+3 ฿)</button>
+          <button class="opt-btn" onclick="sel(this,'bind','staple')" id="o-staple"><span class="dot"></span>เย็บมุม (+0 ฿)</button>
           <button class="opt-btn" onclick="sel(this,'bind','spiral')" id="o-spiral"><span class="dot"></span>สปริง (+30 ฿/ชุด)</button>
           <button class="opt-btn" onclick="sel(this,'bind','cover')" id="o-cover"><span class="dot"></span>สันกาว (+50 ฿/ชุด)</button>
         </div>
@@ -687,7 +687,7 @@ body {
 // ============================================================
 // CONFIG — แก้ URL นี้หลัง Deploy Google Apps Script
 // ============================================================
-var GAS_URL = 'https://script.google.com/macros/s/AKfycbwsMafnhXs1IHw6brMAqavlYH7SI5cONXQimGtbJvMTrjSrOsGAs--Ke6hwE7BFXTDWKQ/exec';
+var GAS_URL = 'https://script.google.com/macros/s/AKfycbxDvs_o83kD_COVBdTiwANVnlX4ty6b96AY-Vu7W2tmIyblc2qn-s0pqpQKiiww0hd3/exec';
 // ============================================================
 
 var st = { color:'bw', size:'a4', bind:'none', payMethod:'qr', slip1:false, slip2:false };
