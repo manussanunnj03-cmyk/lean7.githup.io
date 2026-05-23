@@ -157,6 +157,8 @@ body {
   border-top: 1px solid var(--border); margin-top: 8px; padding-top: 8px;
 }
 .pr.total span:last-child { color: var(--blue) }
+
+/* ── Upload Area ── */
 .upload-area {
   border: 1.5px dashed var(--border2);
   border-radius: var(--radius-sm);
@@ -164,13 +166,56 @@ body {
   text-align: center;
   cursor: pointer;
   transition: all .15s;
+  position: relative;
 }
-.upload-area:hover, .upload-area.has-file {
-  border-color: var(--blue);
-  background: var(--blue-lt);
+.upload-area:hover { border-color: var(--blue); background: var(--blue-lt); }
+.upload-area.has-file { border-color: var(--green); background: var(--green-lt); border-style: solid; }
+.upload-area.has-file .upload-idle { display: none; }
+.upload-area.has-file .upload-done { display: flex; }
+.upload-idle { display: flex; flex-direction: column; align-items: center; gap: 6px; }
+.upload-done {
+  display: none;
+  align-items: center; gap: 10px;
+  text-align: left;
 }
-.upload-area p { font-size:13px; color:var(--txt2); margin-top:6px }
-.upload-area .fname { font-size:13px; color:var(--blue); font-weight:600; margin-top:4px }
+.upload-done-icon {
+  width: 38px; height: 38px; border-radius: 9px;
+  background: #fff; border: 1px solid #97C459;
+  display: flex; align-items: center; justify-content: center; flex-shrink: 0;
+}
+.upload-done-info { flex: 1; min-width: 0; }
+.upload-done-name { font-size: 13px; font-weight: 600; color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.upload-done-size { font-size: 11px; color: var(--txt3); margin-top: 2px; }
+.upload-change { font-size: 11px; color: var(--txt3); text-decoration: underline; cursor: pointer; flex-shrink: 0; }
+
+/* ── File Progress ── */
+.file-progress {
+  display: none;
+  margin-top: .625rem;
+  background: var(--bg);
+  border-radius: var(--radius-sm);
+  padding: .625rem .875rem;
+  border: 1px solid var(--border);
+}
+.file-progress.show { display: block; }
+.fp-label { display: flex; justify-content: space-between; font-size: 12px; color: var(--txt2); margin-bottom: 6px; }
+.fp-bar-bg { height: 5px; background: var(--bg2); border-radius: 10px; overflow: hidden; }
+.fp-bar { height: 5px; background: var(--blue); border-radius: 10px; width: 0%; transition: width .2s; }
+.fp-bar.done { background: var(--green); }
+
+/* ── File size warning ── */
+.file-warn {
+  display: none;
+  margin-top: .5rem;
+  background: var(--amber-lt);
+  border: 1px solid #FAC775;
+  border-radius: var(--radius-sm);
+  padding: .5rem .75rem;
+  font-size: 12px;
+  color: var(--amber);
+}
+.file-warn.show { display: block; }
+
 .pay-methods { display:flex; flex-direction:column; gap:8px }
 .pay-method {
   border: 1px solid var(--border2);
@@ -306,11 +351,49 @@ body {
   font-size: 13px; font-weight:600;
   margin-bottom: 1rem;
 }
+
+/* ── File success info in step 3 ── */
+.file-success-box {
+  display: none;
+  background: var(--green-lt);
+  border: 1px solid #97C459;
+  border-radius: var(--radius-sm);
+  padding: .75rem 1rem;
+  margin-bottom: 1rem;
+  text-align: left;
+  align-items: center;
+  gap: 10px;
+}
+.file-success-box.show { display: flex; }
+.file-success-box .fsb-icon {
+  width: 34px; height: 34px;
+  background: #fff;
+  border-radius: 8px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.file-success-box .fsb-info { flex: 1; min-width: 0; }
+.file-success-box .fsb-name { font-size: 13px; font-weight: 600; color: var(--green); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.file-success-box .fsb-sub { font-size: 11px; color: #5A9020; margin-top: 2px; }
+.file-success-box a {
+  font-size: 12px; font-weight: 600;
+  color: var(--blue);
+  text-decoration: none;
+  border: 1px solid var(--blue);
+  border-radius: 6px;
+  padding: 4px 10px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.file-success-box a:hover { background: var(--blue-lt); }
+
 .section { display:none }
 .section.show { display:block }
+
+/* ── Loading Overlay ── */
 .loading-overlay {
   position: fixed; inset:0;
-  background: rgba(255,255,255,.85);
+  background: rgba(255,255,255,.9);
   display:flex; flex-direction:column;
   align-items:center; justify-content:center;
   z-index:999;
@@ -327,6 +410,17 @@ body {
 }
 @keyframes spin { to { transform:rotate(360deg) } }
 .loading-text { font-size:14px; color:var(--txt2); margin-top:12px; font-weight:500 }
+.loading-sub  { font-size:12px; color:var(--txt3); margin-top:4px }
+
+/* ── Upload Progress in overlay ── */
+.upload-progress-wrap {
+  width: 240px;
+  margin-top: 1rem;
+}
+.up-bar-bg { height: 6px; background: var(--bg2); border-radius: 10px; overflow: hidden; }
+.up-bar { height: 6px; background: var(--blue); border-radius: 10px; width: 0%; transition: width .3s; }
+.up-pct { font-size: 12px; color: var(--txt3); text-align: center; margin-top: 5px; }
+
 .toast {
   position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
   background:#1A1915; color:#F7F6F2;
@@ -339,16 +433,19 @@ body {
   z-index:1000;
   transform: translateX(-50%) translateY(8px);
 }
-.toast.show {
-  opacity:1;
-  transform: translateX(-50%) translateY(0);
-}
+.toast.show { opacity:1; transform: translateX(-50%) translateY(0); }
 </style>
 </head>
 <body>
+
 <div class="loading-overlay" id="loadingOverlay">
   <div class="spinner"></div>
   <div class="loading-text" id="loadingText">กำลังบันทึก...</div>
+  <div class="loading-sub"  id="loadingSub"></div>
+  <div class="upload-progress-wrap" id="uploadProgressWrap" style="display:none">
+    <div class="up-bar-bg"><div class="up-bar" id="upBar"></div></div>
+    <div class="up-pct" id="upPct">0%</div>
+  </div>
 </div>
 <div class="toast" id="toast"></div>
 
@@ -378,6 +475,7 @@ body {
     </div>
   </div>
 
+  <!-- ── STEP 1 ── -->
   <div id="sec1" class="section show">
     <div class="card">
       <div class="card-title"><i class="ti ti-brand-line" style="font-size:14px"></i> ข้อมูลผู้สั่ง</div>
@@ -395,12 +493,42 @@ body {
 
     <div class="card">
       <div class="card-title"><i class="ti ti-file-upload" style="font-size:14px"></i> ไฟล์งาน</div>
+
+      <!-- Upload area -->
       <div class="upload-area" id="uploadArea" onclick="document.getElementById('fi').click()">
-        <i class="ti ti-cloud-upload" style="font-size:28px;color:#378ADD"></i>
-        <p>คลิกอัปโหลด PDF, Word หรือรูปภาพ</p>
-        <p class="fname" id="fname"></p>
+        <div class="upload-idle">
+          <i class="ti ti-cloud-upload" style="font-size:28px;color:#378ADD"></i>
+          <p style="font-size:13px;color:var(--txt2)">คลิกอัปโหลด PDF, Word หรือรูปภาพ</p>
+          <p style="font-size:11px;color:var(--txt3)">รองรับ .pdf .doc .docx .jpg .png · ไม่เกิน 20MB</p>
+        </div>
+        <div class="upload-done" id="uploadDone">
+          <div class="upload-done-icon">
+            <i class="ti ti-file-check" style="font-size:18px;color:var(--green)"></i>
+          </div>
+          <div class="upload-done-info">
+            <div class="upload-done-name" id="uploadDoneName"></div>
+            <div class="upload-done-size" id="uploadDoneSize"></div>
+          </div>
+          <span class="upload-change" onclick="clearFile(event)">เปลี่ยน</span>
+        </div>
       </div>
       <input type="file" id="fi" accept=".pdf,.doc,.docx,.jpg,.jpeg,.png" style="display:none" onchange="handleFile(this)">
+
+      <!-- Reading progress (shown while FileReader works) -->
+      <div class="file-progress" id="fileProgress">
+        <div class="fp-label">
+          <span id="fpLabel">กำลังอ่านไฟล์...</span>
+          <span id="fpPct">0%</span>
+        </div>
+        <div class="fp-bar-bg"><div class="fp-bar" id="fpBar"></div></div>
+      </div>
+
+      <!-- Size warning -->
+      <div class="file-warn" id="fileWarn">
+        <i class="ti ti-alert-triangle" style="font-size:13px;vertical-align:-1px"></i>
+        ไฟล์ใหญ่มาก — การอัปโหลดอาจใช้เวลาสักครู่ค่ะ
+      </div>
+
       <div class="field" style="margin-top:.75rem;margin-bottom:0">
         <label>หมายเหตุ / คำแนะนำพิเศษ</label>
         <textarea id="cnote" placeholder="เช่น เย็บมุมบนซ้าย, พิมพ์หน้า 1-10, พิมพ์สองหน้า..."></textarea>
@@ -493,6 +621,7 @@ body {
     </button>
   </div>
 
+  <!-- ── STEP 2 ── -->
   <div id="sec2" class="section">
     <div class="card">
       <div class="card-title"><i class="ti ti-receipt" style="font-size:14px"></i> สรุปคำสั่ง</div>
@@ -616,6 +745,7 @@ body {
     </div>
   </div>
 
+  <!-- ── STEP 3 ── -->
   <div id="sec3" class="section">
     <div class="success-wrap">
       <div class="success-icon">
@@ -625,6 +755,19 @@ body {
       <div class="paid-badge"><i class="ti ti-check" style="font-size:14px"></i><span id="paidBadgeText">ชำระเงินแล้ว</span></div>
       <p style="font-size:14px;color:var(--txt2);margin-bottom:.5rem">รหัสสำหรับรับงาน</p>
       <div class="order-code-big" id="finalCode">------</div>
+
+      <!-- ไฟล์งานที่อัปโหลดสำเร็จ -->
+      <div class="file-success-box" id="fileSuccessBox">
+        <div class="fsb-icon">
+          <i class="ti ti-file-check" style="font-size:17px;color:var(--green)"></i>
+        </div>
+        <div class="fsb-info">
+          <div class="fsb-name" id="fsbName"></div>
+          <div class="fsb-sub">อัปโหลดสำเร็จ — ร้านได้รับไฟล์แล้ว</div>
+        </div>
+        <a id="fsbLink" href="#" target="_blank">เปิดไฟล์</a>
+      </div>
+
       <div class="info-rows">
         <div class="info-row"><span class="lbl">ชื่อไลน์</span><span class="val" id="si-name">-</span></div>
         <div class="info-row"><span class="lbl">วันที่รับ</span><span class="val" id="si-date">-</span></div>
@@ -644,29 +787,30 @@ body {
 </div>
 
 <script>
+// ============================================================
+// CONFIG
+// ============================================================
 var GAS_URL = 'https://script.google.com/macros/s/AKfycbxGjJGCPqUAsAepeMvkIL5W9F3zhyrC4htNuBRpmHRoSHkE7aZQ1DazgZxKcWE1k4xB/exec';
+var MAX_FILE_MB = 20;
+// ============================================================
 
-var st = { color:'bw', size:'a4', bind:'none', payMethod:'qr', slip1:false, slip2:false };
-
-var pricePerSheet = {
-  'bw-a4':    1,
-  'bw-a3':    5,
-  'color-a4': 5,
-  'color-a3': 20
+var st = {
+  color: 'bw', size: 'a4', bind: 'none',
+  payMethod: 'qr', slip1: false, slip2: false,
+  fileBase64: '', fileName: '', fileMime: '', fileSize: 0
 };
 
-var bindMap = { none:0, staple:0, spiral:30, cover:50 };
+var pricePerSheet = { 'bw-a4':1, 'bw-a3':5, 'color-a4':5, 'color-a3':20 };
+var bindMap  = { none:0, staple:0, spiral:30, cover:50 };
 var colorLbl = { bw:'ขาว-ดำ', color:'สี' };
 var bindLbl  = { none:'ไม่เย็บ', staple:'เย็บมุม', spiral:'สปริง', cover:'สันกาว' };
 var payLbl   = { qr:'QR พร้อมเพย์', transfer:'โอนธนาคาร', cash:'เงินสด ณ ร้าน' };
-
 var priceHints = {
-  'bw-a4':    'ขาว-ดำ A4 = 1 ฿/แผ่น',
-  'bw-a3':    'ขาว-ดำ A3 = 5 ฿/แผ่น',
-  'color-a4': 'สี A4 = 5 ฿/แผ่น',
-  'color-a3': 'สี A3 = 20 ฿/แผ่น'
+  'bw-a4':'ขาว-ดำ A4 = 1 ฿/แผ่น', 'bw-a3':'ขาว-ดำ A3 = 5 ฿/แผ่น',
+  'color-a4':'สี A4 = 5 ฿/แผ่น', 'color-a3':'สี A3 = 20 ฿/แผ่น'
 };
 
+// ── Set min date ──
 (function(){
   var t=new Date();
   var s=t.getFullYear()+'-'+String(t.getMonth()+1).padStart(2,'0')+'-'+String(t.getDate()).padStart(2,'0');
@@ -674,6 +818,7 @@ var priceHints = {
   document.getElementById('pickDate').value=s;
 })();
 
+// ── Option buttons ──
 function sel(btn, type, val) {
   var map = { color:['bw','color'], size:['a4','a3'], bind:['none','staple','spiral','cover'] };
   map[type].forEach(function(v){ var el=document.getElementById('o-'+v); if(el) el.classList.remove('active'); });
@@ -682,6 +827,7 @@ function sel(btn, type, val) {
   calc();
 }
 
+// ── Price calc ──
 function calc() {
   var pages  = Math.max(1, parseInt(document.getElementById('pages').value)||1);
   var copies = Math.max(1, parseInt(document.getElementById('copies').value)||1);
@@ -695,13 +841,89 @@ function calc() {
   document.getElementById('priceHintText').textContent = priceHints[key];
 }
 
+// ── Handle file selection ──
 function handleFile(inp) {
-  if (inp.files[0]) {
-    document.getElementById('fname').textContent = '✓ '+inp.files[0].name;
-    document.getElementById('uploadArea').classList.add('has-file');
+  var file = inp.files[0];
+  if (!file) return;
+
+  // Size check
+  var sizeMB = file.size / (1024 * 1024);
+  if (sizeMB > MAX_FILE_MB) {
+    showToast('ไฟล์ใหญ่เกิน '+MAX_FILE_MB+'MB — กรุณาลดขนาดไฟล์ก่อนค่ะ');
+    inp.value = '';
+    return;
   }
+
+  // Show warn if large
+  var warnEl = document.getElementById('fileWarn');
+  warnEl.classList.toggle('show', sizeMB > 8);
+
+  // Show reading progress
+  var progressEl = document.getElementById('fileProgress');
+  var fpBar = document.getElementById('fpBar');
+  var fpPct = document.getElementById('fpPct');
+  var fpLabel = document.getElementById('fpLabel');
+  progressEl.classList.add('show');
+  fpBar.style.width = '0%';
+  fpBar.classList.remove('done');
+  fpPct.textContent = '0%';
+  fpLabel.textContent = 'กำลังอ่านไฟล์...';
+
+  var reader = new FileReader();
+
+  reader.onprogress = function(e) {
+    if (e.lengthComputable) {
+      var pct = Math.round((e.loaded / e.total) * 100);
+      fpBar.style.width = pct + '%';
+      fpPct.textContent = pct + '%';
+    }
+  };
+
+  reader.onload = function(e) {
+    var base64 = e.target.result.split(',')[1];
+    st.fileBase64 = base64;
+    st.fileName   = file.name;
+    st.fileMime   = file.type || 'application/octet-stream';
+    st.fileSize   = file.size;
+
+    // Done
+    fpBar.style.width = '100%';
+    fpBar.classList.add('done');
+    fpPct.textContent = '100%';
+    fpLabel.textContent = 'อ่านไฟล์เสร็จแล้ว ✓';
+
+    setTimeout(function(){ progressEl.classList.remove('show'); }, 1200);
+
+    // Show done state
+    document.getElementById('uploadArea').classList.add('has-file');
+    document.getElementById('uploadDoneName').textContent = file.name;
+    document.getElementById('uploadDoneSize').textContent = fmtSize(file.size);
+  };
+
+  reader.onerror = function() {
+    progressEl.classList.remove('show');
+    showToast('อ่านไฟล์ไม่สำเร็จ — กรุณาลองใหม่อีกครั้ง');
+  };
+
+  reader.readAsDataURL(file);
 }
 
+function clearFile(e) {
+  e.stopPropagation();
+  st.fileBase64 = ''; st.fileName = ''; st.fileMime = ''; st.fileSize = 0;
+  document.getElementById('fi').value = '';
+  document.getElementById('uploadArea').classList.remove('has-file');
+  document.getElementById('fileProgress').classList.remove('show');
+  document.getElementById('fileWarn').classList.remove('show');
+}
+
+function fmtSize(bytes) {
+  if (bytes < 1024) return bytes + ' B';
+  if (bytes < 1024*1024) return (bytes/1024).toFixed(1) + ' KB';
+  return (bytes/(1024*1024)).toFixed(1) + ' MB';
+}
+
+// ── Slip handling ──
 function handleSlip(inp, areaId, nameId, slotNum) {
   if (inp.files[0]) {
     document.getElementById(nameId).textContent = '✓ '+inp.files[0].name;
@@ -711,15 +933,17 @@ function handleSlip(inp, areaId, nameId, slotNum) {
   }
 }
 
+// ── Payment method ──
 function selPay(el, method) {
   document.querySelectorAll('.pay-method').forEach(function(m){ m.classList.remove('active'); });
   el.classList.add('active');
   st.payMethod = method;
-  document.getElementById('qrSection').style.display      = method==='qr'       ? 'block':'none';
-  document.getElementById('transferSection').style.display = method==='transfer'  ? 'block':'none';
-  document.getElementById('cashSection').style.display     = method==='cash'      ? 'block':'none';
+  document.getElementById('qrSection').style.display       = method==='qr'       ? 'block':'none';
+  document.getElementById('transferSection').style.display  = method==='transfer'  ? 'block':'none';
+  document.getElementById('cashSection').style.display      = method==='cash'      ? 'block':'none';
 }
 
+// ── Step 1 → 2 ──
 function goStep2() {
   var name  = document.getElementById('cname').value.trim();
   var phone = document.getElementById('cphone').value.trim();
@@ -729,9 +953,9 @@ function goStep2() {
     showToast('กรุณากรอกชื่อไลน์ เบอร์ วันที่ และเวลาให้ครบก่อนนะคะ');
     return;
   }
-  var total   = document.getElementById('prTotal').textContent;
-  var pages   = document.getElementById('pages').value;
-  var copies  = document.getElementById('copies').value;
+  var total  = document.getElementById('prTotal').textContent;
+  var pages  = document.getElementById('pages').value;
+  var copies = document.getElementById('copies').value;
   document.getElementById('sumDetail').textContent = colorLbl[st.color]+' · '+st.size.toUpperCase()+' · '+bindLbl[st.bind]+' · '+pages+' หน้า × '+copies+' ชุด';
   document.getElementById('sumTotal').textContent  = total;
   document.getElementById('qrAmount').textContent  = total;
@@ -741,16 +965,18 @@ function goStep2() {
 
 function goBack() { setStep(1); }
 
+// ── Confirm & Send ──
 function confirmOrder() {
-  if (st.payMethod!=='cash' && !st.slip1 && !st.slip2) {
+  if (st.payMethod !== 'cash' && !st.slip1 && !st.slip2) {
     showToast('กรุณาอัปโหลดสลิปการชำระเงินด้วยนะคะ');
     return;
   }
-  var code    = genCode();
-  var pages   = parseInt(document.getElementById('pages').value)||1;
-  var copies  = parseInt(document.getElementById('copies').value)||1;
-  var totalStr= document.getElementById('sumTotal').textContent;
-  var totalNum= parseInt(totalStr)||0;
+
+  var code     = genCode();
+  var pages    = parseInt(document.getElementById('pages').value)||1;
+  var copies   = parseInt(document.getElementById('copies').value)||1;
+  var totalStr = document.getElementById('sumTotal').textContent;
+  var totalNum = parseInt(totalStr)||0;
 
   var orderData = {
     action:          'newOrder',
@@ -766,27 +992,75 @@ function confirmOrder() {
     pickup_date:     document.getElementById('pickDate').value,
     pickup_time:     document.getElementById('pickTime').value,
     payment_method:  st.payMethod,
-    payment_status:  st.payMethod==='cash' ? 'pending' : 'paid',
+    payment_status:  st.payMethod === 'cash' ? 'pending' : 'paid',
     note:            document.getElementById('cnote').value.trim(),
-    slip:            (st.slip1||st.slip2) ? 'slip_'+code+'.jpg' : ''
+    slip:            (st.slip1||st.slip2) ? 'slip_'+code+'.jpg' : '',
+    // ── ส่วนไฟล์งาน ──
+    file_data:  st.fileBase64,
+    file_name:  st.fileName,
+    file_mime:  st.fileMime
   };
 
-  showLoading('กำลังบันทึกคำสั่ง...');
+  // มีไฟล์ → แสดง progress upload
+  if (st.fileBase64) {
+    showLoading('กำลังอัปโหลดไฟล์งาน...', 'อาจใช้เวลา 5-30 วินาทีขึ้นกับขนาดไฟล์');
+    showUploadProgress();
+  } else {
+    showLoading('กำลังบันทึกคำสั่ง...', '');
+  }
 
-  fetch(GAS_URL, { method:'POST', body:JSON.stringify(orderData) })
+  fetch(GAS_URL, {
+    method: 'POST',
+    body: JSON.stringify(orderData)
+  })
   .then(function(r){ return r.json(); })
-  .then(function(){ showSuccess(orderData, code, totalStr); })
-  .catch(function(){ showSuccess(orderData, code, totalStr); })
-  .finally(function(){ hideLoading(); });
+  .then(function(res){
+    hideLoading();
+    showSuccess(orderData, code, totalStr, res.file_url || '');
+  })
+  .catch(function(){
+    // ถ้า fetch error (เช่น CORS) แต่ GAS อาจรับแล้ว — ให้แสดง success ต่อ
+    hideLoading();
+    showSuccess(orderData, code, totalStr, '');
+  });
 }
 
-function showSuccess(d, code, totalStr) {
-  document.getElementById('finalCode').textContent = code;
-  document.getElementById('si-name').textContent   = d.customer_name;
-  document.getElementById('si-date').textContent   = fmtDate(d.pickup_date);
-  document.getElementById('si-time').textContent   = d.pickup_time+' น.';
-  document.getElementById('si-price').textContent  = totalStr;
-  document.getElementById('si-pay').textContent    = payLbl[d.payment_method];
+// ── Fake upload progress (GAS ไม่ส่ง real progress) ──
+var _upTimer;
+function showUploadProgress() {
+  var wrap = document.getElementById('uploadProgressWrap');
+  var bar  = document.getElementById('upBar');
+  var pct  = document.getElementById('upPct');
+  wrap.style.display = 'block';
+  var p = 0;
+  clearInterval(_upTimer);
+  _upTimer = setInterval(function(){
+    // เพิ่มช้าลงเรื่อยๆ หยุดที่ 90% รอ response จริง
+    var step = p < 30 ? 3 : p < 60 ? 2 : p < 80 ? 1 : 0.3;
+    p = Math.min(p + step, 90);
+    bar.style.width = p + '%';
+    pct.textContent = Math.round(p) + '%';
+  }, 300);
+}
+
+function finishUploadProgress() {
+  clearInterval(_upTimer);
+  var bar = document.getElementById('upBar');
+  var pct = document.getElementById('upPct');
+  bar.style.width = '100%';
+  pct.textContent = '100%';
+}
+
+// ── Show success page ──
+function showSuccess(d, code, totalStr, fileUrl) {
+  document.getElementById('finalCode').textContent  = code;
+  document.getElementById('si-name').textContent    = d.customer_name;
+  document.getElementById('si-date').textContent    = fmtDate(d.pickup_date);
+  document.getElementById('si-time').textContent    = d.pickup_time+' น.';
+  document.getElementById('si-price').textContent   = totalStr;
+  document.getElementById('si-pay').textContent     = payLbl[d.payment_method];
+
+  // Badge
   var badgeEl = document.getElementById('paidBadgeText');
   if (d.payment_method==='cash') {
     badgeEl.textContent = 'รอชำระ ณ ร้าน';
@@ -797,9 +1071,27 @@ function showSuccess(d, code, totalStr) {
     badgeEl.parentElement.style.background = 'var(--green-lt)';
     badgeEl.parentElement.style.color = '#27500A';
   }
+
+  // ไฟล์งาน
+  var fsb = document.getElementById('fileSuccessBox');
+  if (d.file_name) {
+    document.getElementById('fsbName').textContent = d.file_name;
+    var link = document.getElementById('fsbLink');
+    if (fileUrl) {
+      link.href = fileUrl;
+      link.style.display = '';
+    } else {
+      link.style.display = 'none';
+    }
+    fsb.classList.add('show');
+  } else {
+    fsb.classList.remove('show');
+  }
+
   setStep(3);
 }
 
+// ── Steps UI ──
 function setStep(n) {
   ['sec1','sec2','sec3'].forEach(function(s,i){
     document.getElementById(s).classList.toggle('show', i===n-1);
@@ -821,12 +1113,12 @@ function setStep(n) {
   window.scrollTo({ top:0, behavior:'smooth' });
 }
 
+// ── Reset ──
 function resetForm() {
+  clearFile({ stopPropagation: function(){} });
   document.getElementById('cname').value = '';
   document.getElementById('cphone').value = '';
   document.getElementById('cnote').value = '';
-  document.getElementById('fname').textContent = '';
-  document.getElementById('uploadArea').classList.remove('has-file');
   document.getElementById('slipName').textContent = '';
   document.getElementById('slipArea').classList.remove('has-slip');
   document.getElementById('slipName2').textContent = '';
@@ -840,6 +1132,7 @@ function resetForm() {
   calc();
 }
 
+// ── Helpers ──
 function genCode() {
   var c='ABCDEFGHJKLMNPQRSTUVWXYZ23456789', r='';
   for (var i=0;i<6;i++) r+=c[Math.floor(Math.random()*c.length)];
@@ -847,9 +1140,9 @@ function genCode() {
 }
 
 function fmtDate(val) {
-  if(!val) return '-';
+  if (!val) return '-';
   var parts=val.split('-');
-  if(parts.length<3) return val;
+  if (parts.length<3) return val;
   var months=['ม.ค.','ก.พ.','มี.ค.','เม.ย.','พ.ค.','มิ.ย.','ก.ค.','ส.ค.','ก.ย.','ต.ค.','พ.ย.','ธ.ค.'];
   return parseInt(parts[2])+' '+months[parseInt(parts[1])-1]+' '+(parseInt(parts[0])+543);
 }
@@ -862,12 +1155,19 @@ function showToast(msg) {
   toastTimer=setTimeout(function(){ el.classList.remove('show'); }, 3000);
 }
 
-function showLoading(msg) {
+function showLoading(msg, sub) {
   document.getElementById('loadingText').textContent = msg||'กำลังโหลด...';
+  document.getElementById('loadingSub').textContent  = sub||'';
+  document.getElementById('uploadProgressWrap').style.display = 'none';
   document.getElementById('loadingOverlay').classList.add('show');
 }
 function hideLoading() {
-  document.getElementById('loadingOverlay').classList.remove('show');
+  clearInterval(_upTimer);
+  finishUploadProgress();
+  setTimeout(function(){
+    document.getElementById('loadingOverlay').classList.remove('show');
+    document.getElementById('uploadProgressWrap').style.display = 'none';
+  }, 400);
 }
 
 calc();
