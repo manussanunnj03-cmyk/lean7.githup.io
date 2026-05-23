@@ -40,8 +40,6 @@ body {
   margin: 0 auto;
   padding: 1.25rem 1rem 5rem;
 }
-
-/* ── Header ── */
 .hdr {
   text-align: center;
   margin-bottom: 1.75rem;
@@ -58,8 +56,6 @@ body {
 }
 .hdr h1 { font-size: 20px; font-weight: 700 }
 .hdr p  { font-size: 13px; color: var(--txt2); margin-top: 4px }
-
-/* ── Steps ── */
 .steps {
   display: flex;
   align-items: center;
@@ -80,8 +76,6 @@ body {
 .step-label { color:var(--txt3) }
 .step-label.active { color:var(--txt); font-weight:600 }
 .step-line { flex:1; height:1px; background:var(--border); margin:0 8px }
-
-/* ── Card ── */
 .card {
   background: #fff;
   border: 1px solid var(--border);
@@ -98,8 +92,6 @@ body {
   margin-bottom: .875rem;
   display: flex; align-items:center; gap:5px;
 }
-
-/* ── Fields ── */
 .field { margin-bottom: .875rem }
 .field:last-child { margin-bottom: 0 }
 .field label {
@@ -131,8 +123,6 @@ body {
 }
 .field textarea { resize: vertical; min-height: 72px }
 .row2 { display: grid; grid-template-columns: 1fr 1fr; gap: 10px }
-
-/* ── Option Buttons ── */
 .opts { display: flex; flex-wrap: wrap; gap: 7px }
 .opt-btn {
   border: 1px solid var(--border2);
@@ -154,8 +144,6 @@ body {
   border: 1.5px solid currentColor; flex-shrink:0;
 }
 .opt-btn.active .dot { background:currentColor }
-
-/* ── Price Box ── */
 .price-box {
   background: var(--bg);
   border-radius: var(--radius-sm);
@@ -169,8 +157,6 @@ body {
   border-top: 1px solid var(--border); margin-top: 8px; padding-top: 8px;
 }
 .pr.total span:last-child { color: var(--blue) }
-
-/* ── Upload ── */
 .upload-area {
   border: 1.5px dashed var(--border2);
   border-radius: var(--radius-sm);
@@ -185,8 +171,6 @@ body {
 }
 .upload-area p { font-size:13px; color:var(--txt2); margin-top:6px }
 .upload-area .fname { font-size:13px; color:var(--blue); font-weight:600; margin-top:4px }
-
-/* ── Pay Methods ── */
 .pay-methods { display:flex; flex-direction:column; gap:8px }
 .pay-method {
   border: 1px solid var(--border2);
@@ -215,8 +199,6 @@ body {
   background:var(--blue);
   box-shadow: inset 0 0 0 3px #fff;
 }
-
-/* ── QR / Slip ── */
 .qr-box {
   background: var(--bg);
   border-radius: var(--radius-sm);
@@ -236,7 +218,6 @@ body {
 }
 .qr-amount { font-size:24px; font-weight:700; color:var(--blue); margin-bottom:4px }
 .qr-note   { font-size:12px; color:var(--txt2) }
-
 .slip-area {
   border: 1.5px dashed var(--border2);
   border-radius: var(--radius-sm);
@@ -247,8 +228,6 @@ body {
   transition: all .15s;
 }
 .slip-area:hover, .slip-area.has-slip { border-color:var(--green); background:var(--green-lt) }
-
-/* ── Buttons ── */
 .submit-btn {
   width: 100%;
   padding: 14px;
@@ -282,8 +261,6 @@ body {
   box-shadow: none;
 }
 .btn-secondary:hover { background:var(--bg); transform:none }
-
-/* ── Success ── */
 .success-wrap { text-align:center; padding:1.25rem 0 2rem }
 .success-icon {
   width:64px; height:64px;
@@ -322,7 +299,6 @@ body {
 .info-row:last-child { border-bottom:none; padding-bottom:0 }
 .info-row .lbl { color:var(--txt2); width:90px; flex-shrink:0; font-weight:500 }
 .info-row .val { color:var(--txt); font-weight:600 }
-
 .paid-badge {
   display: inline-flex; align-items:center; gap:5px;
   background: var(--green-lt); color:#27500A;
@@ -330,12 +306,8 @@ body {
   font-size: 13px; font-weight:600;
   margin-bottom: 1rem;
 }
-
-/* ── Sections ── */
 .section { display:none }
 .section.show { display:block }
-
-/* ── Loading Overlay ── */
 .loading-overlay {
   position: fixed; inset:0;
   background: rgba(255,255,255,.85);
@@ -355,8 +327,6 @@ body {
 }
 @keyframes spin { to { transform:rotate(360deg) } }
 .loading-text { font-size:14px; color:var(--txt2); margin-top:12px; font-weight:500 }
-
-/* ── Toast ── */
 .toast {
   position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
   background:#1A1915; color:#F7F6F2;
@@ -408,9 +378,7 @@ body {
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════ STEP 1 ═══════════════════════════════════ -->
   <div id="sec1" class="section show">
-
     <div class="card">
       <div class="card-title"><i class="ti ti-brand-line" style="font-size:14px"></i> ข้อมูลผู้สั่ง</div>
       <div class="row2">
@@ -441,7 +409,6 @@ body {
 
     <div class="card">
       <div class="card-title"><i class="ti ti-settings" style="font-size:14px"></i> รายละเอียดงาน</div>
-
       <div class="field">
         <label>รูปแบบการพิมพ์</label>
         <div class="opts">
@@ -449,7 +416,6 @@ body {
           <button class="opt-btn" onclick="sel(this,'color','color')" id="o-color"><span class="dot"></span>สี</button>
         </div>
       </div>
-
       <div class="field">
         <label>ขนาดกระดาษ</label>
         <div class="opts">
@@ -457,13 +423,10 @@ body {
           <button class="opt-btn" onclick="sel(this,'size','a3')" id="o-a3"><span class="dot"></span>A3</button>
         </div>
       </div>
-
-      <!-- Price hint per sheet -->
       <div id="priceHint" style="font-size:12px;color:var(--blue);background:var(--blue-lt);border-radius:6px;padding:7px 10px;margin-bottom:.875rem">
         <i class="ti ti-info-circle" style="font-size:13px;vertical-align:-1px"></i>
         <span id="priceHintText">ขาว-ดำ A4 = 1 ฿/แผ่น</span>
       </div>
-
       <div class="field">
         <label>การเย็บเล่ม</label>
         <div class="opts">
@@ -473,7 +436,6 @@ body {
           <button class="opt-btn" onclick="sel(this,'bind','cover')" id="o-cover"><span class="dot"></span>สันกาว (+50 ฿/ชุด)</button>
         </div>
       </div>
-
       <div class="row2">
         <div class="field">
           <label>จำนวนหน้า (ต่อชุด)</label>
@@ -484,7 +446,6 @@ body {
           <input type="number" id="copies" min="1" value="1" oninput="calc()">
         </div>
       </div>
-
       <div class="price-box">
         <div class="pr"><span>ค่าถ่ายเอกสาร</span><span id="prPrint">1 ฿</span></div>
         <div class="pr"><span>ค่าเย็บ/เข้าเล่ม</span><span id="prBind">0 ฿</span></div>
@@ -532,9 +493,7 @@ body {
     </button>
   </div>
 
-  <!-- ═══════════════════════════════════ STEP 2 ═══════════════════════════════════ -->
   <div id="sec2" class="section">
-
     <div class="card">
       <div class="card-title"><i class="ti ti-receipt" style="font-size:14px"></i> สรุปคำสั่ง</div>
       <div class="price-box" style="margin-top:0">
@@ -578,7 +537,6 @@ body {
         </div>
       </div>
 
-      <!-- QR Section -->
       <div id="qrSection" style="margin-top:.75rem">
         <div class="qr-box">
           <div class="qr-img">
@@ -622,7 +580,6 @@ body {
         <input type="file" id="slipFile" accept="image/*" style="display:none" onchange="handleSlip(this,'slipArea','slipName',1)">
       </div>
 
-      <!-- Transfer Section -->
       <div id="transferSection" style="display:none;margin-top:.75rem">
         <div class="qr-box">
           <p style="font-size:13px;font-weight:600;margin-bottom:.625rem">ข้อมูลบัญชีโอนเงิน</p>
@@ -640,7 +597,6 @@ body {
         <input type="file" id="slipFile2" accept="image/*" style="display:none" onchange="handleSlip(this,'slipArea2','slipName2',2)">
       </div>
 
-      <!-- Cash Section -->
       <div id="cashSection" style="display:none;margin-top:.75rem">
         <div class="qr-box">
           <i class="ti ti-map-pin" style="font-size:26px;color:var(--amber)"></i>
@@ -660,7 +616,6 @@ body {
     </div>
   </div>
 
-  <!-- ═══════════════════════════════════ STEP 3 ═══════════════════════════════════ -->
   <div id="sec3" class="section">
     <div class="success-wrap">
       <div class="success-icon">
@@ -800,7 +755,7 @@ function confirmOrder() {
   var orderData = {
     action:          'newOrder',
     order_code:      code,
-    line_name:       document.getElementById('cname').value.trim(),
+    customer_name:   document.getElementById('cname').value.trim(),
     phone:           document.getElementById('cphone').value.trim(),
     color_type:      st.color,
     paper_size:      st.size.toUpperCase(),
@@ -827,7 +782,7 @@ function confirmOrder() {
 
 function showSuccess(d, code, totalStr) {
   document.getElementById('finalCode').textContent = code;
-  document.getElementById('si-name').textContent   = d.line_name;
+  document.getElementById('si-name').textContent   = d.customer_name;
   document.getElementById('si-date').textContent   = fmtDate(d.pickup_date);
   document.getElementById('si-time').textContent   = d.pickup_time+' น.';
   document.getElementById('si-price').textContent  = totalStr;
